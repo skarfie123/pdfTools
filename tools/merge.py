@@ -4,9 +4,6 @@ from PyPDF2 import PdfFileMerger
 def merge(infiles, outfile, logger):
     logger("--- PDF Tools: Merge ---")
 
-    if infiles is None or outfile is None:
-        print("Please provide both infiles and an outfile")
-        return False
     if len(infiles) == 1:
         print("Please provide more than 1 infile")
         return False

@@ -2,7 +2,7 @@ from tools.utils import parse_pages
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
-def rotate(infile, pages, outfile, logger):
+def rotate(infile, pages, outfile, angle, logger):
     logger("--- PDF Tools: Rotate ---")
 
     if outfile == infile:
@@ -17,7 +17,7 @@ def rotate(infile, pages, outfile, logger):
     for p in range(input_pdf.getNumPages()):
         page = input_pdf.getPage(p)
         if p in page_list:
-            page.rotateClockwise(90)
+            page.rotateClockwise(angle)
         output.addPage(page)
 
     output_file = open(outfile, "wb")

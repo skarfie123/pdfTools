@@ -21,18 +21,29 @@ merge_parser = subparsers.add_parser(
     help="merge multiple pdfs into one",
     description="Merge multiple pdfs into one",
 )
-merge_parser.add_argument("-i", "--infiles", nargs="+", help="input files")
-merge_parser.add_argument("-o", "--outfile", help="output file")
+required_merge_parser = merge_parser.add_argument_group("required arguments")
+required_merge_parser.add_argument(
+    "-i", "--infiles", nargs="+", help="input files", required=True
+)
+required_merge_parser.add_argument("-o", "--outfile", help="output file", required=True)
 
 # tool: rotate
 rotate_parser = subparsers.add_parser(
     "rotate",
-    help="rotate specified 90 degrees clockwise",
-    description="Rotate specified 90 degrees clockwise",
+    help="rotate specified pages",
+    description="Rotate specified pages",
 )
 rotate_parser.add_argument("infile", help="input file")
 rotate_parser.add_argument("pages", help='pages to rotate eg. "1-3,6"')
 rotate_parser.add_argument("outfile", help="output file")
+rotate_parser.add_argument(
+    "-a",
+    "--angle",
+    help="angle to rotate by (degrees clockwise) - default: 90",
+    type=int,
+    default=90,
+    choices=[90, 180, 270],
+)
 
 # parse args
 args = parser.parse_args()
@@ -42,12 +53,12 @@ logger("Arguments:", args)
 # execute
 if args.tool == "extract":
     if not extract(args.infile, args.pages, args.outfile, logger):
-        extract_parser.print_help()
+        extract_parser.print_usage()
 elif args.tool == "merge":
     if not merge(args.infiles, args.outfile, logger):
-        merge_parser.print_help()
+        merge_parser.print_usage()
 elif args.tool == "rotate":
-    if not rotate(args.infile, args.pages, args.outfile, logger):
-        rotate_parser.print_help()
+    if not rotate(args.infile, args.pages, args.outfile, args.angle, logger):
+        rotate_parser.print_usage()
 else:
     parser.print_help()
