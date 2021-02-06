@@ -3,7 +3,7 @@ from tools.extract import extract
 from tools.merge import merge
 from tools.rotate import rotate
 
-parser = argparse.ArgumentParser(description="PDF Tools by Skarfie123")
+parser = argparse.ArgumentParser(description="pdfTools by skarfie123")
 subparsers = parser.add_subparsers(help="desired tool", dest="tool")
 parser.add_argument("-v", "--verbose", help="verbose output text", action="store_true")
 

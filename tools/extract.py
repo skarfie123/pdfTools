@@ -3,7 +3,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 def extract(infile, pages, outfile, logger):
-    logger("--- PDF Tools: Extract ---")
+    logger("--- pdfTools: extract ---")
 
     if outfile == infile:
         print("The outfile can not be the infile")

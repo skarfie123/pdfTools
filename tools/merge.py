@@ -2,7 +2,7 @@ from PyPDF2 import PdfFileMerger
 
 
 def merge(infiles, outfile, logger):
-    logger("--- PDF Tools: Merge ---")
+    logger("--- pdfTools: merge ---")
 
     if len(infiles) == 1:
         print("Please provide more than 1 infile")

@@ -1,3 +1,6 @@
 env/
 *.pdf
 __pycache__/
+build/
+dist/
+pdfTools.spec

@@ -3,7 +3,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 def rotate(infile, pages, outfile, angle, logger):
-    logger("--- PDF Tools: Rotate ---")
+    logger("--- pdfTools: rotate ---")
 
     if outfile == infile:
         print("The outfile can not be the infile")
