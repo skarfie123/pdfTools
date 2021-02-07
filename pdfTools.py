@@ -1,4 +1,5 @@
 import argparse
+from tools.delete import delete
 from tools.extract import extract
 from tools.merge import merge
 from tools.rotate import rotate
@@ -6,6 +7,14 @@ from tools.rotate import rotate
 parser = argparse.ArgumentParser(description="pdfTools by skarfie123")
 subparsers = parser.add_subparsers(help="desired tool", dest="tool")
 parser.add_argument("-v", "--verbose", help="verbose output text", action="store_true")
+
+# tool: delete
+delete_parser = subparsers.add_parser(
+    "delete", help="delete specified pages", description="Delete specified pages"
+)
+delete_parser.add_argument("infile", help="input file")
+delete_parser.add_argument("pages", help='pages to delete eg. "1-3,6"')
+delete_parser.add_argument("outfile", help="output file")
 
 # tool: extract
 extract_parser = subparsers.add_parser(
@@ -51,7 +60,10 @@ logger = print if args.verbose else lambda *args, **kwargs: None
 logger("Arguments:", args)
 
 # execute
-if args.tool == "extract":
+if args.tool == "delete":
+    if not delete(args.infile, args.pages, args.outfile, logger):
+        delete_parser.print_usage()
+elif args.tool == "extract":
     if not extract(args.infile, args.pages, args.outfile, logger):
         extract_parser.print_usage()
 elif args.tool == "merge":
