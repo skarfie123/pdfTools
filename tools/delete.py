@@ -2,8 +2,8 @@ from tools.utils import parse_pages
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
-def extract(infile, pages, outfile, logger):
-    logger("--- pdfTools: extract ---")
+def delete(infile, pages, outfile, logger):
+    logger("--- pdfTools: delete ---")
 
     if outfile == infile:
         print("Error: The outfile can not be the infile")
@@ -14,14 +14,9 @@ def extract(infile, pages, outfile, logger):
     logger("Page List:", [p + 1 for p in page_list])
     output = PdfFileWriter()
 
-    for p in page_list:
-        try:
+    for p in range(input_pdf.getNumPages()):
+        if not p in page_list:
             output.addPage(input_pdf.getPage(p))
-        except IndexError:
-            print(
-                f"Error: Cannot extract a page that doesn't exist in the infile - {p + 1}"
-            )
-            return False
 
     output_file = open(outfile, "wb")
     output.write(output_file)

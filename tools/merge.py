@@ -5,10 +5,10 @@ def merge(infiles, outfile, logger):
     logger("--- pdfTools: merge ---")
 
     if len(infiles) == 1:
-        print("Please provide more than 1 infile")
+        print("Error: Please provide more than 1 infile")
         return False
     if outfile in infiles:
-        print("The outfile can not be one of the infiles")
+        print("Error: The outfile can not be one of the infiles")
         return False
 
     merger = PdfFileMerger()
