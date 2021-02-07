@@ -6,7 +6,7 @@ def delete(infile, pages, outfile, logger):
     logger("--- pdfTools: delete ---")
 
     if outfile == infile:
-        print("The outfile can not be the infile")
+        print("Error: The outfile can not be the infile")
         return False
 
     input_pdf = PdfFileReader(open(infile, "rb"))

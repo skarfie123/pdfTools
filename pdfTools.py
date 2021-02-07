@@ -3,9 +3,10 @@ from tools.delete import delete
 from tools.extract import extract
 from tools.merge import merge
 from tools.rotate import rotate
+from tools.substitute import substitute
 
 parser = argparse.ArgumentParser(description="pdfTools by skarfie123")
-subparsers = parser.add_subparsers(help="desired tool", dest="tool")
+subparsers = parser.add_subparsers(title="tools", dest="tool", metavar="{TOOL}")
 parser.add_argument("-v", "--verbose", help="verbose output text", action="store_true")
 
 # tool: delete
@@ -54,6 +55,17 @@ rotate_parser.add_argument(
     choices=[90, 180, 270],
 )
 
+# tool: substitute
+substitute_parser = subparsers.add_parser(
+    "substitute",
+    help="substitute specified pages from donor into recipient",
+    description="Substitute specified pages from donor into recipient",
+)
+substitute_parser.add_argument("recipient", help="input file as base")
+substitute_parser.add_argument("donor", help="input file to pick substitutes")
+substitute_parser.add_argument("pages", help='pages to substitute eg. "1-3,6"')
+substitute_parser.add_argument("outfile", help="output file")
+
 # parse args
 args = parser.parse_args()
 logger = print if args.verbose else lambda *args, **kwargs: None
@@ -72,5 +84,8 @@ elif args.tool == "merge":
 elif args.tool == "rotate":
     if not rotate(args.infile, args.pages, args.outfile, args.angle, logger):
         rotate_parser.print_usage()
+elif args.tool == "substitute":
+    if not substitute(args.recipient, args.donor, args.pages, args.outfile, logger):
+        substitute_parser.print_usage()
 else:
     parser.print_help()

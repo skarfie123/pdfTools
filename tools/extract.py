@@ -6,7 +6,7 @@ def extract(infile, pages, outfile, logger):
     logger("--- pdfTools: extract ---")
 
     if outfile == infile:
-        print("The outfile can not be the infile")
+        print("Error: The outfile can not be the infile")
         return False
 
     input_pdf = PdfFileReader(open(infile, "rb"))
@@ -15,7 +15,13 @@ def extract(infile, pages, outfile, logger):
     output = PdfFileWriter()
 
     for p in page_list:
-        output.addPage(input_pdf.getPage(p))
+        try:
+            output.addPage(input_pdf.getPage(p))
+        except IndexError:
+            print(
+                f"Error: Cannot extract a page that doesn't exist in the infile - {p + 1}"
+            )
+            return False
 
     output_file = open(outfile, "wb")
     output.write(output_file)

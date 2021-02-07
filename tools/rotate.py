@@ -6,7 +6,7 @@ def rotate(infile, pages, outfile, angle, logger):
     logger("--- pdfTools: rotate ---")
 
     if outfile == infile:
-        print("The outfile can not be the infile")
+        print("Error: The outfile can not be the infile")
         return False
 
     input_pdf = PdfFileReader(open(infile, "rb"))
