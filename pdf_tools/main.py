@@ -1,10 +1,10 @@
 import argparse
 
-from delete import delete
-from extract import extract
-from merge import merge
-from rotate import rotate
-from substitute import substitute
+from .delete import delete
+from .extract import extract
+from .merge import merge
+from .rotate import rotate
+from .substitute import substitute
 
 
 def cli():

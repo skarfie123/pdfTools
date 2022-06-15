@@ -1,6 +1,6 @@
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
-from utils import parse_pages
+from .utils import parse_pages
 
 
 def extract(infile, pages, outfile, logger):

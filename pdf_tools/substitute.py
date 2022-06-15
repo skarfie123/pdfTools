@@ -1,4 +1,4 @@
-from utils import parse_pages
+from .utils import parse_pages
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 

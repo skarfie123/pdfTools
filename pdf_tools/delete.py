@@ -1,5 +1,6 @@
-from utils import parse_pages
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+from .utils import parse_pages
 
 
 def delete(infile, pages, outfile, logger):
