@@ -1,9 +1,9 @@
-from tools.utils import parse_pages
+from utils import parse_pages
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
-def extract(infile, pages, outfile, logger):
-    logger("--- pdfTools: extract ---")
+def rotate(infile, pages, outfile, angle, logger):
+    logger("--- pdfTools: rotate ---")
 
     if outfile == infile:
         print("Error: The outfile can not be the infile")
@@ -14,14 +14,11 @@ def extract(infile, pages, outfile, logger):
     logger("Page List:", [p + 1 for p in page_list])
     output = PdfFileWriter()
 
-    for p in page_list:
-        try:
-            output.addPage(input_pdf.getPage(p))
-        except IndexError:
-            print(
-                f"Error: Cannot extract a page that doesn't exist in the infile - {p + 1}"
-            )
-            return False
+    for p in range(input_pdf.getNumPages()):
+        page = input_pdf.getPage(p)
+        if p in page_list:
+            page.rotateClockwise(angle)
+        output.addPage(page)
 
     output_file = open(outfile, "wb")
     output.write(output_file)

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "pdf-tools"
+version = "2.0.0"
+description = ""
+authors = ["skarfie123 <rahulpai@rocketmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+PyPDF2 = "^2.2.0"
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+pdf-tools = "pdf_tools.main:cli"
+pt = "pdf_tools.main:cli"
